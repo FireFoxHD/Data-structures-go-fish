@@ -21,15 +21,28 @@ public class Deck {
         top = newCard;
     }
 
+    public Card pop(){
+        Card temp;
+        temp = top;
+        top = temp.getNext();
+        return temp;
+    }
+
     @Override
     public String toString() {
-        Card tmp = top;
-        String result = "[ \n";
-        while(tmp != null){
-            result = result + tmp.getRank() + " OF " + tmp.getSuit() +"\n";
-            tmp = tmp.getNext();
+        Card temp = top;
+        String result = "";
+        while(temp != null){
+            result = result + temp.getRank() + " OF " + temp.getSuit() +"\n";
+            temp = temp.getNext();
         }
-        result = result + "]";
         return result;
+    }
+
+    public void showDeck(){
+        if(top == null){
+            System.out.println("Deck is empty");
+        }
+        System.out.println(this.toString());
     }
 }

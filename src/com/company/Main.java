@@ -6,6 +6,13 @@ public class Main {
         Deck deck = new Deck();
         deck.push("TEN","HEARTS");
         deck.push("ACE","SPADES");
-        System.out.println(deck.toString());
+
+
+        deck.showDeck();
+        System.out.println(deck.pop());
+        deck.showDeck();
+        System.out.println(deck.pop());
+        deck.showDeck();
+
     }
 }
