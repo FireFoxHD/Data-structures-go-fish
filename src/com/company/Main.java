@@ -7,7 +7,9 @@ public class Main {
 
         deck.initialize();
         deck.showDeck();
-
+        System.out.println("---------------------");
+        deck.shuffle();
+        deck.showDeck();
 
 
     }

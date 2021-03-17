@@ -1,56 +1,60 @@
 package com.company;
 import java.util.Random;
+
 //a deck is a stack of cards(linked list)
 
 public class Deck {
 
     Card top;
-    int deckSize = 52;
+    int deckSize;
+    int MAX_DECK_SIZE = 52;
     String[] suits = {"Hearts (♥)", "Spades (♠)", "Diamonds (♦)", "Clubs (♣)"};
     String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10", "Jack","Queen","King"};
 
     public Deck() {
         top = null;
+        deckSize = 0;
     }
 
     public void initialize(){
-        Card[] temp = new Card[deckSize];
-        int tempSize=0;
-        for(int i = 0; i < ranks.length; i++){
-            for(int j = 0; j < suits.length; j++){
-                temp[tempSize] = new Card(ranks[i], suits[j]);
-                tempSize++;
-            }
+        for(int i = 0; i < MAX_DECK_SIZE; i++) {
+            this.push(new Card(ranks[i % ranks.length], suits[i / ranks.length]));
         }
-        shuffle(temp);
     }
 
-    private void shuffle(Card[] cardArr){
-        Random random = new Random();
-        Card temp;
-        int randNum;
+    public void shuffle(){
+        Card[] cardArr = new Card[deckSize];
 
-        for(int i = 0; i < cardArr.length; i++){
-            randNum = random.nextInt(deckSize);
+        for(int i = 0; i < cardArr.length; i++){ //pops initial unshuffled deck into an array
+             cardArr[i] = this.pop();
+        }
+
+        for(int i = 0; i < cardArr.length; i++){ //shuffles deck via swapping current index with random index
+            Card temp;
+            Random random = new Random();
+            int randNum = random.nextInt(cardArr.length);
+
             temp = cardArr[i];
             cardArr[i] = cardArr[randNum];
             cardArr[randNum] = temp;
         }
 
-        for(int i = 0; i < cardArr.length; i++){
-            push(cardArr[i]);
+        for(int i = 0; i < cardArr.length; i++){ //pushes shuffled cards back into array
+            this.push(cardArr[i]);
         }
     }
 
     public void push(Card card){
         card.setNext(top);
         top = card;
+        deckSize++;
     }
 
     public void push(String rank, String suit){
         Card newCard = new Card(rank,suit);
         newCard.setNext(top);
         top = newCard;
+        deckSize++;
     }
 
     public Card peek(){ //shows top card without removing
@@ -63,6 +67,7 @@ public class Deck {
         Card temp;
         temp = top;
         top = temp.getNext();
+        deckSize--;
         return temp;
     }
 
@@ -82,5 +87,9 @@ public class Deck {
             System.out.println("Deck is empty");
         }
         System.out.println(this.toString());
+    }
+
+    public int getDeckSize() {
+        return deckSize;
     }
 }
