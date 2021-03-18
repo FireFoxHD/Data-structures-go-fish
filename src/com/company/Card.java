@@ -1,7 +1,8 @@
 package com.company;
 //a card is a node
 
-public class Card {
+public class Card 
+{
 
     private String rank;
     private String suit;

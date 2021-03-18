@@ -3,12 +3,13 @@ import java.util.Random;
 
 //a deck is a stack of cards(linked list)
 
-public class Deck {
+public class Deck 
+{
 
     Card top;
     int deckSize;
     int MAX_DECK_SIZE = 52;
-    String[] suits = {"Hearts (♥)", "Spades (♠)", "Diamonds (♦)", "Clubs (♣)"};
+    String[] suits = {"Hearts", "Spades", "Diamonds", "Clubs"};
     String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10", "Jack","Queen","King"};
 
     public Deck() {
