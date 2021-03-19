@@ -3,8 +3,7 @@ import java.util.Random;
 
 //a deck is a stack of cards(linked list)
 
-public class Deck 
-{
+public class Deck{
 
     Card top;
     int deckSize;
