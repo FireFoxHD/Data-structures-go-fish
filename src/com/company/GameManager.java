@@ -2,17 +2,21 @@ package com.company;
 
 import java.util.Scanner;
 
-public class GameManager {
-    enum Result {HEADS, TAILS};
-    enum Turn {PLAYER, COMPUTER};
+public class GameManager 
+{
+	
+	
+    private enum Result {HEADS, TAILS};
+    // private enum Turn {PLAYER, COMPUTER};
+    private Deck deck;
+    
 
-    public GameManager() {
-
-    }
-
-    public void start() {
-
-
+    public GameManager() 
+    {
+    	deck = new Deck();
+    	deck.initialize();
+    	deck.shuffle();
+    	
 
     }
 
@@ -45,4 +49,54 @@ public class GameManager {
         }
         return false;
     }
+    
+    public void Deal(Player player) 
+    {
+    	for(int i = 0; i < 4; i++ ) 
+    	{
+    		player.setHand[i] = deck.pop();
+    	}
+    }
+    
+    public boolean IsGameDone(Player computer, Player player) 
+    {
+    	boolean gameDone = false;
+    	
+    	if(computer.isHandEmpty() == true && player.isHandEmpty() == true && deck.getDeckSize() == 0 ) 
+    	{
+    		gameDone = true;
+    	}
+    	return gameDone;
+    	
+    }
+    
+    
+    
+    public String determineWinner(Player computer, Player player) 
+    {
+    	
+    	String endState = "";
+    	
+    	System.out.Println("Player Score: " + player.getNumOfBooks());
+    	
+    	System.out.Println("Computer Score: " + computer.getNumOfBooks());
+    	
+    	if(player.getNumOfBooks() > computer.getNumOfBooks() ) 
+    	{
+    		endState = "Player Wins";
+    	}
+    	else if(player.getNumOfBooks() < computer.getNumOfBooks() )
+    	{
+    		endState = "Computer Wins";
+    	}
+    	else 
+    	{
+    		endState = "The Game Has Ended In a Draw";
+    	}
+    	
+    	System.out.println("" + endState);
+    }
+    
+    
+    
 }
