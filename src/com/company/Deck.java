@@ -3,7 +3,7 @@ import java.util.Random;
 
 //a deck is a stack of cards(linked list)
 
-public class Deck{
+public class Deck{ 
 
     Card top;
     int deckSize;
@@ -69,6 +69,13 @@ public class Deck{
         top = temp.getNext();
         deckSize--;
         return temp;
+    }
+
+    public boolean isEmpty(){
+        if(top == null){
+            return true;
+        }
+        return false;
     }
 
     @Override

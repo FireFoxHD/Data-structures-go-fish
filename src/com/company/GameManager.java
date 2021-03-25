@@ -2,28 +2,22 @@ package com.company;
 
 import java.util.Scanner;
 
-public class GameManager 
-{
-	
+public class GameManager{
 	
     private enum Result {HEADS, TAILS};
-    // private enum Turn {PLAYER, COMPUTER};
     private Deck deck;
     
 
-    public GameManager() 
-    {
+    public GameManager(){
     	deck = new Deck();
     	deck.initialize();
     	deck.shuffle();
-    	
-
     }
 
-    public Result flip() {
+    public Result flip(){
         int coin = (int) (Math.random() * 2);
 
-        if (coin == 0) {
+        if (coin == 0){
             return Result.HEADS;
         }
 
@@ -50,53 +44,36 @@ public class GameManager
         return false;
     }
     
-    public void Deal(Player player) 
-    {
+    public void deal(Player player){
     	for(int i = 0; i < 4; i++ ) 
     	{
-    		player.setHand[i] = deck.pop();
+    		player.addToHand(deck.pop());
     	}
     }
     
-    public boolean IsGameDone(Player computer, Player player) 
-    {
+    public boolean isGameDone(Player computer, Player player){
     	boolean gameDone = false;
     	
-    	if(computer.isHandEmpty() == true && player.isHandEmpty() == true && deck.getDeckSize() == 0 ) 
-    	{
+    	if(computer.isHandEmpty() == true && player.isHandEmpty() == true && deck.getDeckSize() == 0){
     		gameDone = true;
     	}
     	return gameDone;
-    	
     }
     
-    
-    
-    public String determineWinner(Player computer, Player player) 
-    {
-    	
-    	String endState = "";
-    	
-    	System.out.Println("Player Score: " + player.getNumOfBooks());
-    	
-    	System.out.Println("Computer Score: " + computer.getNumOfBooks());
-    	
-    	if(player.getNumOfBooks() > computer.getNumOfBooks() ) 
-    	{
-    		endState = "Player Wins";
-    	}
-    	else if(player.getNumOfBooks() < computer.getNumOfBooks() )
-    	{
-    		endState = "Computer Wins";
-    	}
-    	else 
-    	{
-    		endState = "The Game Has Ended In a Draw";
-    	}
-    	
-    	System.out.println("" + endState);
+    public void determineWinner(Player computer, Player player) {
+
+        String endState = "";
+
+        System.out.println("Player Score: " + player.getNumOfBooks());
+        System.out.println("Computer Score: " + computer.getNumOfBooks());
+
+        if (player.getNumOfBooks() > computer.getNumOfBooks()) {
+            endState = "Player Wins";
+        } else if (player.getNumOfBooks() < computer.getNumOfBooks()) {
+            endState = "Computer Wins";
+        } else {
+            endState = "The Game Has Ended In a Draw";
+        }
+        System.out.println(endState);
     }
-    
-    
-    
 }
