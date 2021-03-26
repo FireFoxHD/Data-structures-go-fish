@@ -63,7 +63,7 @@ public class Hand { //linked list of card nodes
             throw new RuntimeException("There are no cards in hand....at all");
         }
 
-        while (temp.getNext() != null) {
+        while (temp != null) {
             if (temp.getRank() == rank) {
                 return true;
             }

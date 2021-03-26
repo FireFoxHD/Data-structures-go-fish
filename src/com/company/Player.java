@@ -11,14 +11,22 @@ package com.company;
 
 
 public class Player {
+    private String name;
     private int numOfBooks;
-    private int handSize;
     private Hand hand;
-    private Card[] bookDeck;
+    private Card[] bookDeck; //consider making book deck a hand(list)
 
-    Player() {
+    public Player() {
+        name = "";
         numOfBooks = 0;
-        hand = null;
+        hand = new Hand();
+        bookDeck = null;
+    }
+
+    public Player(String name) {
+        this.name = name;
+        numOfBooks = 0;
+        hand = new Hand();
         bookDeck = null;
     }
 
@@ -29,18 +37,35 @@ public class Player {
             return true;
     }
 
-
-    public Hand getHand() {
-        return this.hand;
+    public boolean isCardInHand(String rank){
+        return hand.isCardInHand(rank);
     }
 
     public void addToHand(Card card) {
-       this.hand.insert(card);
+       hand.insert(card);
+    }
+
+    public void removeCard(Card key){
+        hand.remove(key);
     }
 
     public void addToBook(Card[] bd) {
         Card[] bookDeck=bd;
         numOfBooks++;
+    } //check
+
+    public void ask() {
+        System.out.println("Do you have any ");
+    }
+
+    public void showHand() {
+        hand.showHand();
+    }
+
+    //getters and setters
+
+    public Hand getHand() {
+        return this.hand;
     }
 
     public Card[] getBookDeck() {
@@ -51,16 +76,12 @@ public class Player {
         return bookDeck.length;
     }
 
-    public void ask() {
-        System.out.println("Do you have any ");
+    public String getName() {
+        return name;
     }
 
-    public void showHand() {
-        hand.showHand();
-    }
-
-    public void showBookDeck(){
-        System.out.println(bookDeck);
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
