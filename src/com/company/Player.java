@@ -29,15 +29,14 @@ public class Player {
             return true;
     }
 
+
     public Hand getHand() {
         return this.hand;
     }
 
-
-    public void addToHand(Card pop) {
-       this.hand.insert(pop);
+    public void addToHand(Card card) {
+       this.hand.insert(card);
     }
-
 
     public void addToBook(Card[] bd) {
         Card[] bookDeck=bd;

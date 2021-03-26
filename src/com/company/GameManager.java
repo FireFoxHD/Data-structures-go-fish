@@ -6,7 +6,6 @@ public class GameManager{
 	
     private enum Result {HEADS, TAILS};
     private Deck deck;
-    
 
     public GameManager(){
     	deck = new Deck();
