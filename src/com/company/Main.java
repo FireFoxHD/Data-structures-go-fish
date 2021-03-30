@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +10,7 @@ public class Main {
 
         Player player = new Player();
         Player computer = new Player();
-        Player currentPlayer = new Player();
+        Player currentPlayer;
 
         GameManager game = new GameManager();
         game.deal(player);
@@ -26,12 +25,11 @@ public class Main {
 
         //TODO : After cards are dealt check for books
 
-//        while(!game.isGameDone(player, computer)){
         while(!game.isGameDone(player, computer)){
             boolean toggle = game.isPlayerTurn()? true : false;;
             currentPlayer = toggle? player : computer;
             if (currentPlayer == player){
-                //human player section
+                //human player section - code for when its the players turn
 
                 System.out.print("What card rank do you want to ask for: ");
                 Scanner scan = new Scanner(System.in);
@@ -58,7 +56,7 @@ public class Main {
                     computer.showHand();
                 }
             }else{
-                //computer section
+                //computer section - code for when its the computers turn
 
                 currentPlayer.ask();
             }

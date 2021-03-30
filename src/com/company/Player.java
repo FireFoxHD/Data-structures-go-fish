@@ -20,7 +20,7 @@ public class Player {
         this.name = name;
         numOfBooks = 0;
         hand = new Hand();
-        bookDeck = null;
+        bookDeck = new Hand();
     }
 
     public boolean isHandEmpty() {
@@ -73,6 +73,7 @@ public class Player {
         bookDeck.showHand();
     }
 
+    //TODO: complete this method to make book
     public boolean makeBook(){
 
         Card temp = hand.getHead();

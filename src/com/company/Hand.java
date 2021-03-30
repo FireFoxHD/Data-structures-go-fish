@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.source.tree.WhileLoopTree;
-
 public class Hand { //linked list of card nodes
     private Card head;
 
@@ -56,7 +54,7 @@ public class Hand { //linked list of card nodes
         return cards;
     }
 
-     */ //complete function
+     */
 
     public boolean isCardInHand(String rank) {
         Card temp = this.getHead();
