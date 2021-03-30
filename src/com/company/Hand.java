@@ -1,5 +1,7 @@
 package com.company;
 
+import com.sun.source.tree.WhileLoopTree;
+
 public class Hand { //linked list of card nodes
     private Card head;
 
@@ -56,7 +58,7 @@ public class Hand { //linked list of card nodes
 
      */ //complete function
 
-    public boolean isCardInHand(String rank) { //accept a value instead of card and return card array
+    public boolean isCardInHand(String rank) {
         Card temp = this.getHead();
 
         if (isEmpty()) {
@@ -107,6 +109,25 @@ public class Hand { //linked list of card nodes
             temp = temp.getNext();
         }
         return;
+    }
+
+    public Card getCardByRank(String rank) {
+        Card temp = this.getHead();
+        if (this.isEmpty()) {
+            throw new RuntimeException("cannot remove from an empty list");
+        }
+
+        if (temp.getRank() == rank) {
+            return temp;
+        }
+
+        while(temp.getNext() != null ){
+            if(temp.getNext().getRank() == rank){
+                return temp.getNext();
+            }
+            temp = temp.getNext();
+        }
+        return null;
     }
 
     public int count(){
