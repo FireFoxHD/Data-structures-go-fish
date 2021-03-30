@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class GameManager{
         if(chooseFirstPlayer() == Turn.HUMAN){
             isPlayerTurn = true;
         }
+        System.out.println("");
     }
 
     private Result flip(){

@@ -58,18 +58,19 @@ public class Hand { //linked list of card nodes
 
     public boolean isCardInHand(String rank) {
         Card temp = this.getHead();
-
         if (isEmpty()) {
             throw new RuntimeException("There are no cards in hand....at all");
         }
 
         while (temp != null) {
-            if (temp.getRank() == rank) {
+            String listRank = temp.getRank();
+            if (listRank.equals(rank)) {
                 return true;
             }
             temp = temp.getNext();
         }
         return false;
+
     }
 
     public void insert(Card card) {

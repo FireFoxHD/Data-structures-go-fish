@@ -22,18 +22,20 @@ public class Main {
         player.showHand();
         System.out.println("\nComputer:");
         computer.showHand();
+        System.out.println("\n\n");
 
         //TODO : After cards are dealt check for books
 
         while(!game.isGameDone(player, computer)){
-            boolean toggle = game.isPlayerTurn()? true : false;;
+            boolean toggle = game.isPlayerTurn()? true : false;
             currentPlayer = toggle? player : computer;
             if (currentPlayer == player){
                 //human player section - code for when its the players turn
 
-                System.out.print("What card rank do you want to ask for: ");
+                System.out.print("Player: Do you have any ");
                 Scanner scan = new Scanner(System.in);
                 String rank = scan.next();
+                System.out.println(computer.isCardInHand(rank));
 
                 if(computer.isCardInHand(rank)){
                     System.out.println("here it is");

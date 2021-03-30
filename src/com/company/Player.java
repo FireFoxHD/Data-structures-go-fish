@@ -46,12 +46,11 @@ public class Player {
         return hand.getCardByRank(rank);
     }
 
-
     //allows the computer to randomly ask for a card of a similar rank in its hand
     public String ask() {
         Random random = new Random();
         int randNum = random.nextInt(hand.count())+1;
-        System.out.println("num: "+ randNum);
+
         if (hand.isEmpty()) {
             throw new RuntimeException("There are no cards in hand....at all");
         }
@@ -61,7 +60,7 @@ public class Player {
             temp = temp.getNext();
             i++;
         }
-        System.out.println("Do you have any "+ temp.getRank());
+        System.out.println("Computer: Do you have any "+ temp.getRank());
         return temp.getRank();
     }
 
