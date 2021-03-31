@@ -1,5 +1,7 @@
 package com.company;
 
+import javax.sound.midi.Soundbank;
+
 public class Hand { //linked list of card nodes
     private Card head;
 
@@ -56,7 +58,7 @@ public class Hand { //linked list of card nodes
 
      */
 
-    public boolean isCardInHand(String rank) {
+    public boolean isRankInHand(String rank) {
         Card temp = this.getHead();
         if (isEmpty()) {
             throw new RuntimeException("There are no cards in hand....at all");
@@ -70,7 +72,21 @@ public class Hand { //linked list of card nodes
             temp = temp.getNext();
         }
         return false;
+    }
 
+    public boolean isCardInHand(Card card) {
+        Card temp = this.getHead();
+        if (isEmpty()) {
+            throw new RuntimeException("There are no cards in hand....at all");
+        }
+
+        while (temp != null) {
+            if (temp == card) {
+                return true;
+            }
+            temp = temp.getNext();
+        }
+        return false;
     }
 
     public void insert(Card card) {
@@ -91,38 +107,52 @@ public class Hand { //linked list of card nodes
 
     public void remove(Card key) {
         Card temp = this.getHead();
+
         if (this.isEmpty()) {
             throw new RuntimeException("cannot remove from an empty list");
         }
 
-        if (temp == key) {
-            head = temp.getNext();
-            return;
+        if (!this.isCardInHand(key)) {
+            throw new RuntimeException("Card not in hand");
         }
 
-        while(temp.getNext() != null ){
-            if(temp.getNext() == key){
-               temp.setNext(temp.getNext().getNext());
-               return;
+
+//        if (temp == key) {
+//            head = temp.getNext();
+//            return;
+//        }
+
+        while(temp != null ){
+            Card next = temp.getNext();
+            Card nextNext = temp.getNext().getNext();
+
+            System.out.println("Current: "+temp.toString());
+            System.out.println("Next: "+next.toString());
+            System.out.println("Next next:"+nextNext.toString());
+
+            if(temp == key){
+                System.out.println("NEXT SET!!!!");
+                temp.setNext(nextNext);
+                return;
             }
-            temp = temp.getNext();
+            temp = next;
         }
         return;
     }
 
     public Card getCardByRank(String rank) {
         Card temp = this.getHead();
-        if (this.isEmpty()) {
+        if (this.isEmpty() || temp == null) {
             throw new RuntimeException("cannot remove from an empty list");
         }
 
-        if (temp.getRank() == rank) {
-            return temp;
-        }
+//        if (temp.getRank() == rank) {
+//            return temp;
+//        }
 
-        while(temp.getNext() != null ){
-            if(temp.getNext().getRank() == rank){
-                return temp.getNext();
+        while(temp != null){
+            if(temp.getRank().equals(rank)){
+                return temp;
             }
             temp = temp.getNext();
         }

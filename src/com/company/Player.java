@@ -30,8 +30,8 @@ public class Player {
             return true;
     }
 
-    public boolean isCardInHand(String rank){
-        return hand.isCardInHand(rank);
+    public boolean isRankInHand(String rank){
+        return hand.isRankInHand(rank);
     }
 
     public void addToHand(Card card) {

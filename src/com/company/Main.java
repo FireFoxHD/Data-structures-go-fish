@@ -9,7 +9,7 @@ public class Main {
         System.out.println("**** Welcome to go fish ****");
 
         Player player = new Player();
-        Player computer = new Player();
+        Player computer = new Player("Bob - Built On Bluffing");
         Player currentPlayer;
 
         GameManager game = new GameManager();
@@ -35,19 +35,25 @@ public class Main {
                 System.out.print("Player: Do you have any ");
                 Scanner scan = new Scanner(System.in);
                 String rank = scan.next();
-                System.out.println(computer.isCardInHand(rank));
 
-                if(computer.isCardInHand(rank)){
-                    System.out.println("here it is");
+                if(computer.isRankInHand(rank)){
+                    if(rank.equals("Ace")){
+                        System.out.println("Computer: I do have an "+ rank + "\n");
+                    }else{
+                        System.out.println("Computer: I do have a "+ rank + "\n");
+                    }
                     Card card = computer.getCardByRank(rank);
+                    System.out.println(card.toString());
                     if(card != null){ //redundant since i already checked if card in hand
                         player.addToHand(card);
                         computer.removeCard(card);
+                        System.out.println("num of cards comp: "+computer.getHand().count());
                     }
                     System.out.println("Player:");
                     player.showHand();
                     System.out.println("\nComputer:");
                     computer.showHand();
+                    System.out.println("");
                     continue;
                 }else{
                     System.out.println("PLAYER DRAWS");
