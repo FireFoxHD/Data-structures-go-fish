@@ -5,22 +5,22 @@ import java.util.Random;
 public class Player {
     private String name;
     private int numOfBooks;
-    private Hand hand;
-    private Hand bookDeck; //consider making book deck a hand(list)
+    private List hand;
+    private List bookDeck; //consider making book deck a hand(list)
     private boolean isTurn;
 
     public Player() {
         name = "";
         numOfBooks = 0;
-        hand = new Hand();
-        bookDeck = new Hand();
+        hand = new List();
+        bookDeck = new List();
     }
 
     public Player(String name) {
         this.name = name;
         numOfBooks = 0;
-        hand = new Hand();
-        bookDeck = new Hand();
+        hand = new List();
+        bookDeck = new List();
     }
 
     public boolean isHandEmpty() {
@@ -30,20 +30,12 @@ public class Player {
             return true;
     }
 
-    public boolean isRankInHand(String rank){
-        return hand.isRankInHand(rank);
-    }
-
     public void addToHand(Card card) {
        hand.insert(card);
     }
 
     public void removeCard(Card key){
         hand.remove(key);
-    }
-
-    public Card getCardByRank(String rank){
-        return hand.getCardByRank(rank);
     }
 
     //allows the computer to randomly ask for a card of a similar rank in its hand
@@ -75,42 +67,47 @@ public class Player {
     //TODO: complete this method to make book
     public boolean makeBook(){
 
+        if (hand.isEmpty()) {
+            throw new RuntimeException("Cannot traverse empty list");
+        }
+
         Card temp = hand.getHead();
         Card loop;
         boolean isBook = false;
 
-        if (hand.isEmpty()) {
-            throw new RuntimeException("Cannot traverse empty list");
+        if(hand.count() < 2){ // if one card or less in hand
+            return false;
         }
+
         while(temp != null){
-            System.out.println("-----Searching for: "+ temp.getRank());
             loop = temp.getNext();
             while(loop != null){
-                System.out.println("Current card: "+ loop.getRank());
                 if(loop.getRank().equals(temp.getRank())){
-//                    bookDeck.insert(loop);
-//                    bookDeck.insert(temp);
-                    hand.remove(loop);
+                    bookDeck.insert(loop);
+                    bookDeck.insert(temp);
+                    System.out.println("Book deck :");
+                    bookDeck.showHand();
+                    hand.remove(loop); // issue is im removing the iterator for both while loops
                     hand.remove(temp);
+                    System.out.println("hand:");
+                    hand.showHand();
+
                     isBook=true;
                 }
                 loop = loop.getNext();
             }
-
             temp = temp.getNext();
-            System.out.println("====");
-            showHand();
         }
         return isBook;
     }
 
     //getters and setters
 
-    public Hand getHand() {
+    public List getHand() {
         return this.hand;
     }
 
-    public Hand getBookDeck() {
+    public List getBookDeck() {
         return bookDeck;
     }
 
@@ -130,7 +127,7 @@ public class Player {
         isTurn = turn;
     }
 
-    public void setHand(Hand hand) {
+    public void setHand(List hand) {
         this.hand = hand;
     }
 

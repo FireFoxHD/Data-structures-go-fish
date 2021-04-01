@@ -3,17 +3,17 @@ import java.util.Random;
 
 //a deck is a stack of cards(linked list)
 
-public class Deck{ 
+public class Deck extends Stack{
 
     Card top;
-    int deckSize;
+    int size;
     int MAX_DECK_SIZE = 52;
     String[] suits = {"Hearts", "Spades", "Diamonds", "Clubs"};
     String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
 
     public Deck() {
         top = null;
-        deckSize = 0;
+        size = 0;
     }
 
     public void initialize(){
@@ -23,9 +23,9 @@ public class Deck{
     }
 
     public void shuffle(){
-        Card[] cardArr = new Card[deckSize];
+        Card[] cardArr = new Card[count()];
 
-        for(int i = 0; i < cardArr.length; i++){ //pops initial unshuffled deck into an array
+        for(int i = 0; i < cardArr.length; i++){ //pops initial un-shuffled deck into an array
              cardArr[i] = this.pop();
         }
 
@@ -44,59 +44,11 @@ public class Deck{
         }
     }
 
-    public void push(Card card){
-        card.setNext(top);
-        top = card;
-        deckSize++;
-    }
-
     public void push(String rank, String suit){
         Card newCard = new Card(rank,suit);
         newCard.setNext(top);
         top = newCard;
-        deckSize++;
+        size++;
     }
 
-    public Card peek(){ //shows top card without removing
-        Card temp;
-        temp = top;
-        return temp;
-    }
-
-    public Card pop(){
-        Card temp;
-        temp = top;
-        top = temp.getNext();
-        deckSize--;
-        return temp;
-    }
-
-    public boolean isEmpty(){
-        if(top == null){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        Card temp = top;
-        String result = "";
-        while(temp != null){
-            result = result + temp.toString() +"\n";
-            temp = temp.getNext();
-        }
-        return result;
-    }
-
-    public void showDeck(){
-        if(top == null){
-            System.out.println("Deck is empty");
-        }
-        System.out.println(this.toString());
-    }
-
-    public int getDeckSize() {
-        return deckSize;
-    }
 }

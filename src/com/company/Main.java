@@ -18,11 +18,24 @@ public class Main {
 
         game.start();
 
-        System.out.println("Player:");
+
+        System.out.println("\nPlayer:");
         player.showHand();
+
         System.out.println("\nComputer:");
         computer.showHand();
+
         System.out.println("\n\n");
+
+        if(player.makeBook()){
+            System.out.println("player made a book");
+            player.showHand();
+        }
+
+        if(computer.makeBook()){
+            System.out.println("computer made a book");
+            computer.showHand();
+        }
 
         //TODO : After cards are dealt check for books
 
@@ -36,28 +49,30 @@ public class Main {
                 Scanner scan = new Scanner(System.in);
                 String rank = scan.next();
 
-                if(computer.isRankInHand(rank)){
+                Card card = computer.getHand().searchRank(rank);
+
+                if(card != null){
                     if(rank.equals("Ace")){
                         System.out.println("Computer: I do have an "+ rank + "\n");
                     }else{
                         System.out.println("Computer: I do have a "+ rank + "\n");
                     }
-                    Card card = computer.getCardByRank(rank);
-                    System.out.println(card.toString());
-                    if(card != null){ //redundant since i already checked if card in hand
-                        player.addToHand(card);
-                        computer.removeCard(card);
-                        System.out.println("num of cards comp: "+computer.getHand().count());
-                    }
+
+                    player.addToHand(card);
+                    player.makeBook();
+                    computer.removeCard(card);
+
                     System.out.println("Player:");
                     player.showHand();
                     System.out.println("\nComputer:");
                     computer.showHand();
                     System.out.println("");
+
                     continue;
                 }else{
                     System.out.println("PLAYER DRAWS");
                     player.addToHand(game.drawCard());
+                    player.makeBook();
                     System.out.println("Player:");
                     player.showHand();
                     System.out.println("\nComputer:");
@@ -72,16 +87,5 @@ public class Main {
 
             game.setPlayerTurn(!toggle);
         }
-
-            //first person asks for card
-            //if opponent has card
-                //remove card from opponent
-                //add to askers hand
-                //check for book and if book add to book deck
-                //person asks again (Continue statement)
-            //else
-                //asker draws from deck
-                //check for book and if book add to book deck
-            //toggle player
     }
 }

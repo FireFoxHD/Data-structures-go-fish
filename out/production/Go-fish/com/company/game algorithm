@@ -1,0 +1,20 @@
+0. Start game
+1. Deal cards
+2. Check both players for book
+3. If book then add both cards to book deck
+4. Determine first player
+5. Set first player to current player
+6. while game is not done
+    6.1 Current player asks opponent for card
+    6.2 If opponent has card
+        6.2.1 Remove card from opponent
+        6.2.2 Add to current player's hand
+        6.2.3 check for book and if book add to book deck
+        6.2.4 person asks again (Continue statement)
+    6.3 If opponent does not have card
+        6.3.1 current player draws from deck
+        6.3.1 check for book and if book add to book deck
+    6.4 Toggle player
+
+//TODO complete algorithm after game is done
+7. Count books

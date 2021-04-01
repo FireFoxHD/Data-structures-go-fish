@@ -1,6 +1,5 @@
 package com.company;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -74,7 +73,7 @@ public class GameManager{
     public boolean isGameDone(Player computer, Player player){
     	boolean gameDone = false;
     	
-    	if(computer.isHandEmpty() == true && player.isHandEmpty() == true && deck.getDeckSize() == 0){
+    	if(computer.isHandEmpty() == true && player.isHandEmpty() == true && deck.count() == 0){
     		gameDone = true;
     	}
     	return gameDone;
