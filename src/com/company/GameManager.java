@@ -48,8 +48,7 @@ public class GameManager{
         Result coinChoice = Result.values()[pick];
 
         if (coinChoice == flip()){
-            System.out.println(coinChoice);
-            System.out.println("You win with "+ coinChoice +" would you like to go first [y/n]");
+            System.out.println("Player wins, would you like to go first [y/n]");
             Scanner s = new Scanner(System.in);
             char choice = s.next().toLowerCase().charAt(0);
             if(choice != 'y' && choice != 'n'){
@@ -57,9 +56,11 @@ public class GameManager{
             }
 
             if(choice == 'y'){
+                System.out.println("Player Goes First");
                 return Turn.HUMAN;
             }
         }
+        System.out.println("Computer Goes First");
         return Turn.COMPUTER;
     }
     

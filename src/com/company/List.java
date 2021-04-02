@@ -2,8 +2,8 @@ package com.company;
 
 public class List {
 
-    private Card head;
-    private int size;
+    protected Card head;
+    protected int size;
 
     List(){
         size = 0;
@@ -19,21 +19,18 @@ public class List {
     }
 
     public boolean isEmpty() {
-        if (this.getHead() == null) {
-            return true;
-        }
-        return false;
+        return this.getHead() == null;
     }
 
     public boolean isFull() {
         Card card = new Card();
-        return (card == null);
+        return card == null;
     }
 
     public void insert(Card card) {
         //insert at back
         if (this.isFull()) {
-            throw new RuntimeException("cannot remove from an empty list");
+            throw new RuntimeException("cannot insert to a full list");
         }
 
         Card temp = this.getHead();
@@ -48,14 +45,13 @@ public class List {
             temp = temp.getNext();
         }
         temp.setNext(card);
-        return;
     }
 
-    public Card searchRank(String rank){
+    public Card searchRank(String rank) {
         Card temp = getHead();
 
         if(isEmpty()){
-            return null;
+            throw new RuntimeException("Cannot search an empty list");
         }
 
         while(temp != null){
@@ -67,38 +63,53 @@ public class List {
         return null;
     }
 
-    //TODO check remove --> next = null error
     public void remove(Card key){
 
         if (this.isEmpty()) {
-            throw new RuntimeException("cannot remove from an empty list");
+            throw new RuntimeException("Cannot remove from an empty list");
         }
 
         Card temp = this.getHead();
         this.size--;
 
         if (temp == key) {
-            Card next = temp.getNext();
-            setHead(next);
+            head = head.getNext();
+            key.setNext(null);//explain why
             return;
         }
+
         while(temp != null){
-            if(temp.getNext() == key){
+            if(temp.getNext() == key) {
                 temp.setNext(temp.getNext().getNext());
+                key.setNext(null);
                 return;
             }
             temp = temp.getNext();
         }
-        return;
     }
 
     public int count() { return this.size; }
 
-    public void showHand(){
+    public void show() {
         if (isEmpty()) {
-            throw new RuntimeException("Cannot traverse empty list");
+            System.out.println("[List is Empty !]");
+            return;
         }
 
+        Card temp = this.getHead();
+        while (temp!= null) {
+            System.out.println(temp.toString());
+            temp = temp.getNext();
+        }
+    }
+
+    public void show(String msg) {
+        if (isEmpty()) {
+            System.out.println("[List is Empty !]");
+            return;
+        }
+
+        System.out.println(msg);
         Card temp = this.getHead();
         while (temp!= null) {
             System.out.println(temp.toString());
@@ -116,11 +127,5 @@ public class List {
         }
         return result;
     }
-
-
-
-
-
-
 
 }

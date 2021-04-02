@@ -2,8 +2,8 @@ package com.company;
 
 public class Stack {
 
-    private Card top;
-    private int size;
+    protected Card top;
+    protected int size;
 
     public Stack() {
         top = null;
