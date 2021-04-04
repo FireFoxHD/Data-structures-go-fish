@@ -59,6 +59,7 @@ public class Player {
     }
 
     public String ask() {
+    	System.out.println(" *Enter the rank that you would want(Capitalize any words like Ace)* ");
         System.out.print("Player: Do you have any ");
         Scanner scan = new Scanner(System.in);
         String rank = scan.next();
@@ -94,28 +95,42 @@ public class Player {
     }
 
     //TODO: complete this method to make book
-    public void makeBook(){
-
-        if (hand.isEmpty()) {
+    //is it possible that a hand might have multiple books
+    public void makeBook()
+    {
+    	
+        if (hand.isEmpty()) 
+        {
             return;
         }
 
         Card temp = hand.getHead();
 
-        while(temp != null){
+        while(temp != null)
+        {
             Card nextCard = temp.getNext();
-            while(nextCard != null){
-                if(nextCard.getRank().equals(temp.getRank())){
+            while(nextCard != null)
+            {
+                if(nextCard.getRank().equals(temp.getRank()))
+                {
                     hand.remove(nextCard);
                     hand.remove(temp);
                     bookDeck.insert(nextCard);
                     bookDeck.insert(temp);
+                    System.out.println("Made a book with: " + nextCard.toString() + " and " + temp.toString());
+                    System.out.println("They were added to the book deck ");
+                    System.out.println("");
                     return;
                 }
                 nextCard = nextCard.getNext();
             }
             temp = temp.getNext();
         }
+        
+       
+        System.out.println("didn't add any cards to the book deck");
+        System.out.println("");
+        
         return;
     }
 

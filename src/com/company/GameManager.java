@@ -15,6 +15,16 @@ public class GameManager{
     	deck.initialize();
     	deck.shuffle();
     }
+    
+    //method for the player to press a button to continue so that they are not overwhelmed with text
+    public void PressToContinue() 
+    {
+    	Scanner scan = new Scanner(System.in);
+    	System.out.println("Enter anything to continue");
+    	
+    	scan.nextLine();
+    	System.out.println("");
+    }
 
     public void start(){
         isPlayerTurn = false;
@@ -23,14 +33,19 @@ public class GameManager{
         }
         System.out.println("");
     }
-
+    
+    //method to simulate the flipping of a coin
     private Result flip(){
         Random random = new Random();
         int coin = random.nextInt(2); // the bound is not inclusive thus it generates only 0 and 1
 
-        if (coin == 0){
+        if (coin == 0)
+        {
+        	System.out.println("The coin lands on heads");
             return Result.HEADS;
         }
+        
+        System.out.println("The coin lands on tails");
 
         return Result.TAILS; //if coin is not equal pick will return false
     }
@@ -64,6 +79,7 @@ public class GameManager{
         return Turn.COMPUTER;
     }
     
+    //method that populates a hand with 4 cards
     public void deal(Player player){
     	for(int i = 0; i < 4; i++ ) 
     	{

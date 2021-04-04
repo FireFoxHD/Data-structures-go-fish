@@ -34,15 +34,7 @@ public class Main {
         GameManager game = new GameManager();
         game.deal(player);
         game.deal(computer);
-
-        if(player.hasBook()){
-            player.makeBook();
-        }
-
-        if(computer.hasBook()){
-            computer.makeBook();
-        }
-
+        
 //        player.showHand();
 //
 //        if(player.hasBook()){
@@ -54,6 +46,17 @@ public class Main {
 //        }
 
         game.start();
+        
+        System.out.println("Player:");
+        if(player.hasBook()){
+            player.makeBook();
+        }
+        
+        System.out.println("Computer:");
+
+        if(computer.hasBook()){
+            computer.makeBook();
+        }
 
         //TODO : After cards are dealt check for books
 
@@ -64,12 +67,25 @@ public class Main {
             String rank;
 
             System.out.println("currentPlayer: " + currentPlayer.getName());
+            System.out.println("Hand");
             currentPlayer.showHand();
+            System.out.println("BookDeck");
+            currentPlayer.showBookDeck();
             System.out.println("");
 
             System.out.println("Opponent: "+ opponent.getName());
+            
+            System.out.println("Hand");
             opponent.showHand();
+            
+            System.out.println("BookDeck");
+            opponent.showBookDeck();
             System.out.println("");
+            
+            //NEED TO CHECK IF PLAYER HAND IS EMPTY IF ALL OF THE CARDS THAT HE WAS DEALT CAN MAKE A BOOK
+            
+            game.PressToContinue();
+            
 
             //asking for card
             if(currentPlayer == computer){
@@ -94,7 +110,7 @@ public class Main {
 
             }else{
                 //TODO : if card not in opponents hand
-                System.out.println("I do not have any "+ rank + "s\n");
+                System.out.println("I do not have any " + rank + "s\n");
                 Card drawnCard  = game.drawCard();
                 System.out.println(currentPlayer.getName()+ " draws " + drawnCard.toString());
                 currentPlayer.addToHand(drawnCard);

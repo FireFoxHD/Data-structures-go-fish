@@ -92,7 +92,7 @@ public class List {
 
     public void show() {
         if (isEmpty()) {
-            System.out.println("[List is Empty !]");
+            System.out.println("[Empty!]");
             return;
         }
 
@@ -105,7 +105,7 @@ public class List {
 
     public void show(String msg) {
         if (isEmpty()) {
-            System.out.println("[List is Empty !]");
+            System.out.println("[Empty]");
             return;
         }
 
