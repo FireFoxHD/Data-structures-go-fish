@@ -4,30 +4,24 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
-    private int numOfBooks;
     private List hand;
-    private List bookDeck; //consider making book deck a hand(list)
+    private List bookDeck;
     private boolean isTurn;
 
     public Player() {
         name = "DEFAULT";
-        numOfBooks = 0;
         hand = new List();
         bookDeck = new List();
     }
 
     public Player(String name) {
         this.name = name;
-        numOfBooks = 0;
         hand = new List();
         bookDeck = new List();
     }
 
     public boolean isHandEmpty() {
-        if (hand.isEmpty()) {
-            return false;
-        }else
-            return true;
+        return hand.isEmpty();
     }
 
     public void addToHand(Card card) {
@@ -59,11 +53,32 @@ public class Player {
     }
 
     public String ask() {
-    	System.out.println(" *Enter the rank that you would want(Capitalize any words like Ace)* ");
+        String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+        boolean isRealCard = false;
+
+    	System.out.println("Enter a card rank");
         System.out.print("Player: Do you have any ");
         Scanner scan = new Scanner(System.in);
-        String rank = scan.next();
-        return rank;
+        String rank = scan.next().strip(); //removes trailing and leading whitespace
+
+        //removes "s" at the end of words like King, Queen, Jack and Ace if user added "s"
+        if (rank.endsWith("s")){
+            rank = rank.substring(0, rank.length() - 1);
+        }
+        //Capitalizes first letter of word - can be avoided by creating card rank with common letters and capitalize only when displaying
+        String normalizedRank = rank.substring(0, 1).toUpperCase() + rank.substring(1);
+
+        for(String cardRank : ranks){
+            if(normalizedRank.equals(cardRank)){
+                isRealCard = true;
+                break;
+            }
+        }
+        if(isRealCard == false){
+            ask();
+        }
+
+        return normalizedRank;
     }
 
     public void showHand() {
@@ -74,35 +89,12 @@ public class Player {
         bookDeck.show();
     }
 
-    public boolean hasBook(){
-        Card temp = hand.getHead();
 
-        if(hand.isEmpty()) {
-            return false;
-        }
-
-        while(temp != null){
-            Card loop = temp.getNext();
-            while(loop != null){
-                if(loop.getRank().equals(temp.getRank())){
-                    return true;
-                }
-                temp = temp.getNext();
-            }
-        }
-
-        return false;
-    }
 
     //TODO: complete this method to make book
-    //is it possible that a hand might have multiple books
-    public void makeBook()
-    {
-    	
-        if (hand.isEmpty()) 
-        {
-            return;
-        }
+    public boolean makeBook(){
+
+        if (hand.isEmpty()) return false;
 
         Card temp = hand.getHead();
 
@@ -117,21 +109,17 @@ public class Player {
                     hand.remove(temp);
                     bookDeck.insert(nextCard);
                     bookDeck.insert(temp);
-                    System.out.println("Made a book with: " + nextCard.toString() + " and " + temp.toString());
-                    System.out.println("They were added to the book deck ");
-                    System.out.println("");
-                    return;
+                    System.out.println(getName() + " made a book with: " + nextCard.toString() + " and " + temp.toString());
+                    System.out.println();
+                    return true;
                 }
                 nextCard = nextCard.getNext();
             }
             temp = temp.getNext();
         }
-        
-       
-        System.out.println("didn't add any cards to the book deck");
-        System.out.println("");
-        
-        return;
+
+        System.out.println();
+        return false;
     }
 
     //getters and setters

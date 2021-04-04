@@ -17,13 +17,11 @@ public class GameManager{
     }
     
     //method for the player to press a button to continue so that they are not overwhelmed with text
-    public void PressToContinue() 
+    public void pressToContinue()
     {
     	Scanner scan = new Scanner(System.in);
-    	System.out.println("Enter anything to continue");
-    	
-    	scan.nextLine();
-    	System.out.println("");
+    	System.out.println("Press any key to continue");
+    	scan.next();
     }
 
     public void start(){
@@ -31,7 +29,6 @@ public class GameManager{
         if(chooseFirstPlayer() == Turn.HUMAN){
             isPlayerTurn = true;
         }
-        System.out.println("");
     }
     
     //method to simulate the flipping of a coin
@@ -41,7 +38,7 @@ public class GameManager{
 
         if (coin == 0)
         {
-        	System.out.println("The coin lands on heads");
+        	System.out.println("\nThe coin lands on heads");
             return Result.HEADS;
         }
         
@@ -53,12 +50,13 @@ public class GameManager{
     public Turn chooseFirstPlayer() {
 
         System.out.println("You will now pick between heads or tails as a coin is flipped");
-        System.out.print("Enter 0 for tails or 1 for heads: ");
+        System.out.print("Enter 0 for heads or 1 for tails: ");
         Scanner scan = new Scanner(System.in);
         int pick = scan.nextInt();
 
         if (pick != 1 && pick != 0) {
             throw new RuntimeException("You have entered an invalid option");
+            //prompt them to re-enter
         }
         Result coinChoice = Result.values()[pick];
 
@@ -71,11 +69,11 @@ public class GameManager{
             }
 
             if(choice == 'y'){
-                System.out.println("Player Goes First");
+                System.out.println("Player Goes First\n");
                 return Turn.HUMAN;
             }
         }
-        System.out.println("Computer Goes First");
+        System.out.println("Computer Goes First\n");
         return Turn.COMPUTER;
     }
     
