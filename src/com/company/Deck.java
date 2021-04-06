@@ -5,20 +5,21 @@ import java.util.Random;
 
 public class Deck extends Stack{
 
-    Card top;
-    int size;
     int MAX_DECK_SIZE = 52;
     String[] suits = {"Hearts", "Spades", "Diamonds", "Clubs"};
     String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
 
     public Deck() {
-        top = null;
-        size = 0;
+        super();
     }
 
-    public void initialize(){
-        for(int i = 0; i < MAX_DECK_SIZE; i++) {
-            this.push(new Card(ranks[i % ranks.length], suits[i / ranks.length]));
+    public void initialize(int deckSize, boolean showCards){
+        for(int i = 0; i < deckSize; i++) {
+            Card card = new Card(ranks[i % ranks.length], suits[i / ranks.length]);
+            if(showCards == true){
+                System.out.println(card.toString());
+            }
+            this.push(card);
         }
     }
 
@@ -51,4 +52,9 @@ public class Deck extends Stack{
         size++;
     }
 
+
+    @Override
+    public int count() {
+        return super.count();
+    }
 }

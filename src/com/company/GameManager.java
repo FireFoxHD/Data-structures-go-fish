@@ -5,15 +5,17 @@ import java.util.Scanner;
 
 public class GameManager{
 
-    private enum Result {HEADS, TAILS};
-    private enum Turn {HUMAN, COMPUTER};
+    private enum Result {HEADS, TAILS}
+    private enum Turn {HUMAN, COMPUTER}
     private Deck deck;
     private boolean isPlayerTurn;
 
-    public GameManager(){
+    public GameManager(int deckSize, boolean showCards, boolean shuffle){
     	deck = new Deck();
-    	deck.initialize();
-    	deck.shuffle();
+    	deck.initialize(deckSize, showCards);
+    	if(shuffle){
+            deck.shuffle();
+        }
     }
     
     //method for the player to press a button to continue so that they are not overwhelmed with text
@@ -25,10 +27,7 @@ public class GameManager{
     }
 
     public void start(){
-        isPlayerTurn = false;
-        if(chooseFirstPlayer() == Turn.HUMAN){
-            isPlayerTurn = true;
-        }
+        isPlayerTurn = (chooseFirstPlayer() == Turn.HUMAN);
     }
     
     //method to simulate the flipping of a coin
@@ -88,19 +87,23 @@ public class GameManager{
     public boolean isGameDone(Player computer, Player player){
     	boolean gameDone = false;
     	
-    	if(computer.isHandEmpty() == true && player.isHandEmpty() == true && deck.count() == 0){
+    	if(deck.count() == 0 && (computer.isHandEmpty() || player.isHandEmpty())){
     		gameDone = true;
     	}
     	return gameDone;
     }
 
     public Card drawCard(){
+        if(deck.isEmpty()){
+            System.out.println("Deck is empty!");
+            return null;
+        }
         return deck.pop();
     }
     
     public void determineWinner(Player computer, Player player) {
 
-        String endState = "";
+        String endState;
 
         System.out.println("Player Score: " + player.getNumOfBooks());
         System.out.println("Computer Score: " + computer.getNumOfBooks());
@@ -121,5 +124,9 @@ public class GameManager{
 
     public void setPlayerTurn(boolean playerTurn) {
         isPlayerTurn = playerTurn;
+    }
+
+    public int getDeckSize() {
+        return deck.count();
     }
 }
