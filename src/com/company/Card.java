@@ -5,8 +5,6 @@ public class Card{
 
     private String rank;
     private String suit;
-    int numOfRanks = 13;
-    int numOfSuits = 4;
     private Card next;
 
     public Card(){

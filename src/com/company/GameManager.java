@@ -54,9 +54,10 @@ public class GameManager{
         int pick = scan.nextInt();
 
         if (pick != 1 && pick != 0) {
-            throw new RuntimeException("You have entered an invalid option");
-            //prompt them to re-enter
+            chooseFirstPlayer();
+            //throw new RuntimeException("You have entered an invalid option");
         }
+
         Result coinChoice = Result.values()[pick];
 
         if (coinChoice == flip()){
@@ -78,8 +79,7 @@ public class GameManager{
     
     //method that populates a hand with 4 cards
     public void deal(Player player){
-    	for(int i = 0; i < 4; i++ ) 
-    	{
+    	for(int i = 0; i < 4; i++){
     		player.addToHand(deck.pop());
     	}
     }
@@ -102,20 +102,19 @@ public class GameManager{
     }
     
     public void determineWinner(Player computer, Player player) {
-
         String endState;
-
-        System.out.println("Player Score: " + player.getNumOfBooks());
-        System.out.println("Computer Score: " + computer.getNumOfBooks());
 
         if (player.getNumOfBooks() > computer.getNumOfBooks()) {
             endState = "Player Wins";
         } else if (player.getNumOfBooks() < computer.getNumOfBooks()) {
             endState = "Computer Wins";
         } else {
-            endState = "The Game Has Ended In a Draw";
+            endState = "The Game Has Ended In a Draw\n";
         }
-        System.out.println(endState);
+
+        System.out.println("Player Score: " + player.getNumOfBooks());
+        System.out.println("Computer Score: " + computer.getNumOfBooks());
+        System.out.println(endState+"\n\n");
     }
 
     public boolean isPlayerTurn() {
@@ -124,9 +123,5 @@ public class GameManager{
 
     public void setPlayerTurn(boolean playerTurn) {
         isPlayerTurn = playerTurn;
-    }
-
-    public int getDeckSize() {
-        return deck.count();
     }
 }

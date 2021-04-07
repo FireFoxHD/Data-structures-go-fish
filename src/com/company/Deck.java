@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class Deck extends Stack{
 
-    int MAX_DECK_SIZE = 52;
     String[] suits = {"Hearts", "Spades", "Diamonds", "Clubs"};
     String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
 
@@ -45,16 +44,4 @@ public class Deck extends Stack{
         }
     }
 
-    public void push(String rank, String suit){
-        Card newCard = new Card(rank,suit);
-        newCard.setNext(top);
-        top = newCard;
-        size++;
-    }
-
-
-    @Override
-    public int count() {
-        return super.count();
-    }
 }

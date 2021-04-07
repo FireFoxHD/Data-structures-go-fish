@@ -74,7 +74,7 @@ public class List {
 
         if (temp == key) {
             head = head.getNext();
-            key.setNext(null);//explain why
+            key.setNext(null);//removes the next value from it making it an singular node and not a list segment
             return;
         }
 
@@ -96,20 +96,6 @@ public class List {
             return;
         }
 
-        Card temp = this.getHead();
-        while (temp!= null) {
-            System.out.println(temp.toString());
-            temp = temp.getNext();
-        }
-    }
-
-    public void show(String msg) {
-        if (isEmpty()) {
-            System.out.println("[Empty]");
-            return;
-        }
-
-        System.out.println(msg);
         Card temp = this.getHead();
         while (temp!= null) {
             System.out.println(temp.toString());

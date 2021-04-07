@@ -28,10 +28,6 @@ public class Player {
        hand.insert(card);
     }
 
-    public void removeCard(Card key){
-        hand.remove(key);
-    }
-
     //allows the computer to randomly ask for a card of a similar rank in its hand
     public String askRandom() {
         Random random = new Random();
@@ -56,7 +52,7 @@ public class Player {
         String[] ranks = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
         boolean isRealCard = false;
 
-    	System.out.println("Enter a card rank");
+    	System.out.println("Please enter a card rank that is in your hand");
         System.out.print("Player: Do you have any ");
         Scanner scan = new Scanner(System.in);
         String rank = scan.next().strip(); //removes trailing and leading whitespace
@@ -69,9 +65,11 @@ public class Player {
         String normalizedRank = rank.substring(0, 1).toUpperCase() + rank.substring(1);
 
         for(String cardRank : ranks){
-            if(normalizedRank.equals(cardRank)){
-                isRealCard = true;
-                break;
+            if(normalizedRank.equals(cardRank) ){
+                if(this.getHand().searchRank(normalizedRank) != null){
+                    isRealCard = true;
+                    break;
+                }
             }
         }
         if(isRealCard == false){
@@ -89,9 +87,6 @@ public class Player {
         bookDeck.show();
     }
 
-
-
-    //TODO: complete this method to make book
     public boolean makeBook(){
 
         if (hand.isEmpty()) return false;
@@ -133,7 +128,7 @@ public class Player {
     }
 
     public int getNumOfBooks() {
-        return bookDeck.count();
+        return bookDeck.count()/2;
     }
 
     public String getName() {
